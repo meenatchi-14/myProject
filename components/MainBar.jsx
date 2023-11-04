@@ -1,53 +1,39 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { useState } from "react";
-import AddDoctor from "./AddDoctor";
-import EditDoctor from "./EditDoctor";
+import { useNavigate } from "react-router-dom";
 
-// eslint-disable-next-line react/prop-types
-export default function MainBar() {
-  const data = [
-    {
-      doc_name: "Prashanth",
-      hospital_name: "Kaveri",
-      specialization: "Surgery",
-      status: "Available",
-    },
+//eslint-disable-next-line react/prop-types
+export default function MainBar({doctorData,setDoctordata}) {
+  const navigate =useNavigate();
 
-    {
-      doc_name: "Nikhil",
-      hospital_name: "Apollo",
-      specialization: "Ortho",
-      status: "Not Available",
-    },
-  ];
-  const [doctorData, setDoctordata] = useState(data);
- const [showData,setShowData] = useState(true);
-const [editId,setEditId]=useState("");
-
-//delete function
+  //delete function
   const deleteDoctorDetails=(id)=>{
-    const remainingDoctors=doctorData.filter((docInfo,idx)=> idx !== id); 
+    const remainingDoctors=doctorData.filter((_docInfo,idx)=> idx !== id); 
     setDoctordata(remainingDoctors);
   };
 
   //update function
   const handleEdit =(id)=>{
-setShowData(false);
-setEditId(id);
+   navigate(`/edit/doc/${id}`);
   };
+  
+  const handleStatusChange = (id, event) => {
+    // get the object and change the status info
+    doctorData[id].status = event.target.value;
+    setDoctordata([...doctorData]);
+  };
+
   return (
     <div className="main">
-      {showData ===true ? (
-      <AddDoctor doctorData={doctorData} setDoctordata={setDoctordata}/>
-      ):(
-      <EditDoctor 
-      doctorData={doctorData}
-       setDoctordata={setDoctordata}
-       showData={showData}
-       setShowData={setShowData}
-       editId={editId}
-       />
-      )}
+      <div className="grid justify-center p-2">
+        <button
+        className="btn btn-primary w-24 justufy-start "
+        onClick={()=>navigate("add/doc")}
+        >
+          Add Doctor
+        </button>
+      </div>
       {doctorData && (
         <>
           {doctorData?.map((docInfo, idx) => (
@@ -59,7 +45,10 @@ setEditId(id);
                 <h2 className="card-title">{docInfo.doc_name}</h2>
                 <p>{docInfo.hospital_name}</p>
                 <p>{docInfo.specialization}</p>
-                <select className="select select-bordered select-sm w-36 max-w-xs">
+                <select
+                 className="select select-bordered select-sm w-36 max-w-xs"
+                 onChange={(e) => handleStatusChange(idx, e)}
+                 >
                   {docInfo.status == "Available" ? (
                     <option>Available</option>
                   ) : (
@@ -72,12 +61,18 @@ setEditId(id);
                   )}
                 </select>
                 <div className="card-actions justify-end">
-                  <button className="btn btn-primary"
-                  onClick={()=>handleEdit(idx)}>edit</button>
-                  <button className="btn btn-error"
-                  onClick={()=>deleteDoctorDetails(idx)}>
-                    delete</button>
-                
+                  <button
+                   className={"btn btn-primary"}
+                  onClick={()=>handleEdit(idx)}
+                  >
+                    edit
+                  </button>
+                  <button
+                   className="btn btn-error"
+                  onClick={()=>deleteDoctorDetails(idx)}
+                  >
+                    delete
+                    </button>
                 </div>
               </div>
             </div>

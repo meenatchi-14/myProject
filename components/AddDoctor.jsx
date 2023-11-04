@@ -1,21 +1,24 @@
-/*eslint-disable react/prop-types*/ 
-import { useState } from "react"
+/* eslint-disable react/prop-types */
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 const AddDoctor= ({doctorData,setDoctorData})=>{
 const[docName,setDocName]=useState("");
 const[hospitalName,setHospitalName]=useState("");    
 const[specialization,setSpecializtion]=useState("");
+const navigate=useNavigate();
 const addNewDoctor=()=>{
        const newDoctorDetails={
-       doc_name:docName,
-       hospital_name:hospitalName,
-       specialization,
-       status:"Available",
+          doc_name:docName,
+          hospital_name:hospitalName,
+          specialization,
+           status:"Available",
        };
-
-    setDoctorData([...doctorData,newDoctorDetails]);
-    };
+       setDoctorData([...doctorData, newDoctorDetails]);
+    navigate("/");   
+    }
     return(
-            <div className="grid grid-row-4 justify-center gap-3">
+            <div className="grid grid-rows-4 justify-center gap-1">
             <input
             type="text"
             placeholder="Enter Doctor Name"

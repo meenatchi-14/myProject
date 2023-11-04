@@ -1,24 +1,22 @@
-/*eslint-disable react/prop-types*/ 
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
-const EditDoctor= ({
-    doctorData,
-    setDoctorData,
-    showData,
-    setShowData,
-    editId
-})=>{
+import { useNavigate } from "react-router-dom";
+
+const EditDoctor= ({doctorData,setDoctordata,editId})=>{
 const[docName,setDocName]=useState("");
 const[hospitalName,setHospitalName]=useState("");    
 const[specialization,setSpecializtion]=useState("");
 const[docStatus,setDocStatus]=useState("");
-
+const navigate=useNavigate();
 useEffect(()=>{
     const selectedDoctor=doctorData.filter((doc,idx)=>idx ==editId);
 setDocName(selectedDoctor[0].doc_name);
 setHospitalName(selectedDoctor[0].hospital_name);
 setSpecializtion(selectedDoctor[0].specialization);
 setDocStatus(selectedDoctor[0].status);
-},[doctorData, editId]);
+}, [editId]);
+
 //update
 const updateDoctorDetails=()=>{
     const editedDoctor={
@@ -27,9 +25,10 @@ const updateDoctorDetails=()=>{
         specialization,
         status:docStatus,   
     };
+
     doctorData[editId]=editedDoctor;
-    setDoctorData([...doctorData]);
-    setShowData(!showData);
+    setDoctordata([...doctorData]);
+    navigate("/");
 };
   
 return(
@@ -53,13 +52,16 @@ return(
             placeholder="Enter Specialization"
             className="input input-bordered w-80"
             value={specialization}
-            onChange={(e)=>setSpecializtion(e.target.value)}/>
-            
-            <button className="btn btn-accent w-24 justufy-self-center"
-            onClick={updateDoctorDetails}>
-                Update</button>
-        </div>
-        
+            onChange={(e)=>setSpecializtion(e.target.value)}
+            />
+            <button 
+            className="btn btn-secondary w-24 justufy-self-center"
+            onClick={updateDoctorDetails}
+            >
+                Update
+                </button>
+        </div>  
     );
 };
+
 export default EditDoctor;
