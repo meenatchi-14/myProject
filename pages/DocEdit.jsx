@@ -12,7 +12,7 @@ const DocEdit=({doctorData,setDoctorData})=>{
         <WorkSpace>
     <EditDoctor 
     doctorData={doctorData}
-    setDoctordata={setDoctorData}
+    setDoctorData={setDoctorData}
     editId={id}
     />
     </WorkSpace>

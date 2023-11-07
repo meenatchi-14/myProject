@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const EditDoctor= ({doctorData,setDoctordata,editId})=>{
+const EditDoctor= ({doctorData,setDoctorData,editId})=>{
 const[docName,setDocName]=useState("");
 const[hospitalName,setHospitalName]=useState("");    
 const[specialization,setSpecializtion]=useState("");
@@ -27,7 +27,7 @@ const updateDoctorDetails=()=>{
     };
 
     doctorData[editId]=editedDoctor;
-    setDoctordata([...doctorData]);
+    setDoctorData([...doctorData]);
     navigate("/");
 };
   

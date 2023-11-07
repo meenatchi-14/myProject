@@ -1,5 +1,8 @@
 // eslint-disable-next-line react/prop-types
+import {AppState} from"../context/AppContext";
+
 export default function TopBar() {
+  const {theme,setTheme}=AppState();
   return (
     <div className="top-bar">
       <div className="navbar bg-base-100">
@@ -11,6 +14,20 @@ export default function TopBar() {
               className="input input-bordered w-24 md:w-auto"
             />
           </div>
+          {theme==="dark"?(
+           <button
+           className="btn btn-secondary m-1"
+           onClick={()=>setTheme("light")}>
+            Light</button> 
+          ):(
+            <button 
+            className="btn btn-secondary m-1"
+            onClick={()=>setTheme("dark")}>
+              Dark</button>
+          )
+          }
+         
+          
         </div>
       </div>
     </div>

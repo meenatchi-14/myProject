@@ -1,16 +1,17 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+//import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 //eslint-disable-next-line react/prop-types
-export default function MainBar({doctorData,setDoctordata}) {
+export default function MainBar({doctorData,setDoctorData}) {
   const navigate =useNavigate();
 
   //delete function
   const deleteDoctorDetails=(id)=>{
-    const remainingDoctors=doctorData.filter((_docInfo,idx)=> idx !== id); 
-    setDoctordata(remainingDoctors);
+    const remainingDoctors=doctorData.filter((docInfo,idx)=> idx !== id); 
+    setDoctorData(remainingDoctors);
+    
   };
 
   //update function
@@ -18,17 +19,17 @@ export default function MainBar({doctorData,setDoctordata}) {
    navigate(`/edit/doc/${id}`);
   };
   
+  // get the object and change the status info
   const handleStatusChange = (id, event) => {
-    // get the object and change the status info
     doctorData[id].status = event.target.value;
-    setDoctordata([...doctorData]);
+    setDoctorData([...doctorData]);
   };
 
   return (
     <div className="main">
       <div className="grid justify-center p-2">
         <button
-        className="btn btn-primary w-24 justufy-start "
+        className="btn btn-accent w-24 justufy-start "
         onClick={()=>navigate("add/doc")}
         >
           Add Doctor
@@ -62,14 +63,14 @@ export default function MainBar({doctorData,setDoctordata}) {
                 </select>
                 <div className="card-actions justify-end">
                   <button
-                   className={"btn btn-primary"}
+                   className="btn btn-primary"
                   onClick={()=>handleEdit(idx)}
                   >
                     edit
                   </button>
                   <button
-                   className="btn btn-error"
-                  onClick={()=>deleteDoctorDetails(idx)}
+                   className={"btn btn-error"}
+                  onClick={()=> deleteDoctorDetails(idx)}
                   >
                     delete
                     </button>

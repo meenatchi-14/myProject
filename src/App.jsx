@@ -6,6 +6,7 @@ import {Route,Routes} from"react-router-dom";
 import { useState } from "react";
 import"./App.css";
 import NoPage from "../pages/NoPage";
+import{AppState} from "../context/AppContext"
 
  function App() {
   const data = [
@@ -23,28 +24,28 @@ import NoPage from "../pages/NoPage";
       status: "Not Available",
     },
   ];
-  const [doctorData, setDoctordata] = useState(data);
-
+  const [doctorData, setDoctorData] = useState(data);
+  const{theme}=AppState();
   return (
-    <div className="app">
+    <div className="app" data-theme={theme}>
       <Routes>
         <Route
          exact 
          path="/" 
         element={
-        <DocDash doctorData={doctorData} setDoctorData={setDoctordata} />
+        <DocDash doctorData={doctorData} setDoctorData={setDoctorData} />
          }
          />
         <Route 
          path="/add/doc" 
         element={
-        <DocAdd doctorData={doctorData}setDoctorData={setDoctordata}/>
+        <DocAdd doctorData={doctorData}setDoctorData={setDoctorData}/>
         }
         />
         <Route 
          path="/edit/doc/:id" 
         element={
-        <DocEdit doctorData={doctorData} setDoctorData={setDoctordata}/>
+        <DocEdit doctorData={doctorData} setDoctorData={setDoctorData}/>
         }
         />
         <Route path="*"element={<NoPage/>}/>
