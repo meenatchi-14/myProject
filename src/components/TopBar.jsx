@@ -1,5 +1,5 @@
 // eslint-disable-next-line react/prop-types
-import {AppState} from"../context/AppContext";
+import { AppState } from "../context/AppContext";
 
 export default function TopBar() {
   const {theme,setTheme}=AppState();

@@ -1,30 +1,22 @@
 //eslint-disable-next-line react/prop-types
 import {Route,Routes} from"react-router-dom";
- import DocDash from "../pages/DocDash";
- import DocAdd from "../pages/DocAdd";
- import DocEdit from "../pages/DocEdit";
-import { useState } from "react";
+ import DocDash from "./pages/DocDash";
+ import DocAdd from "./pages/DocAdd";
+ import DocEdit from "./pages/DocEdit";
+import { useEffect,useState } from "react";
 import"./App.css";
-import NoPage from "../pages/NoPage";
-import{AppState} from "../context/AppContext"
+import NoPage from "./pages/NoPage";
+import{AppState} from "./context/AppContext"
+import { getAllDoctor } from "./helper/helper.js";
 
- function App() {
-  const data = [
-    {
-      doc_name: "Prashanth",
-      hospital_name: "Kaveri",
-      specialization: "Surgery",
-      status: "Available",
-    },
-
-    {
-      doc_name: "Nikhil",
-      hospital_name: "Apollo",
-      specialization: "Ortho",
-      status: "Not Available",
-    },
-  ];
-  const [doctorData, setDoctorData] = useState(data);
+ 
+  function App() {
+    const [doctorData, setDoctorData] = useState();
+    useEffect(() => {
+      getAllDoctor().then((data) => {
+        setDoctorData(data);
+      });
+    }, []);
   const{theme}=AppState();
   return (
     <div className="app" data-theme={theme}>

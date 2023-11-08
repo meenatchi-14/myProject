@@ -2,16 +2,21 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import{editNewDoctor}from"../helper/helper"
 
 const EditDoctor= ({doctorData,setDoctorData,editId})=>{
 const[docName,setDocName]=useState("");
 const[hospitalName,setHospitalName]=useState("");    
 const[specialization,setSpecializtion]=useState("");
 const[docStatus,setDocStatus]=useState("");
+const[index,setIndex]=useState("")
 const navigate=useNavigate();
 useEffect(()=>{
-    const selectedDoctor=doctorData.filter((doc,idx)=>idx ==editId);
-setDocName(selectedDoctor[0].doc_name);
+    const selectedDoctor=doctorData.filter((doc)=>doc.id ==editId);
+    const selectedDocIndex=doctorData.findIndex((doc)=>doc.id ==editId);
+    console.log(selectedDocIndex);
+    setIndex[selectedDocIndex]
+    setDocName(selectedDoctor[0].doc_name);
 setHospitalName(selectedDoctor[0].hospital_name);
 setSpecializtion(selectedDoctor[0].specialization);
 setDocStatus(selectedDoctor[0].status);
@@ -25,10 +30,17 @@ const updateDoctorDetails=()=>{
         specialization,
         status:docStatus,   
     };
-
-    doctorData[editId]=editedDoctor;
-    setDoctorData([...doctorData]);
-    navigate("/");
+    editNewDoctor(editId,editedDoctor).then((data)=>{
+        if(data){
+        
+            doctorData[index] = editedDoctor;
+            setDoctorData([...doctorData]);
+            navigate("/");
+        }
+        else{
+            console.log("no update")
+        }
+    });   
 };
   
 return(
