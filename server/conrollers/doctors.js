@@ -22,3 +22,10 @@ export async function editDoctor(id,data) {
     .updateOne({_id:new ObjectId(id)},{$set:data});
     
 }
+export async function deleteDoctor(id) {
+    return client
+    .db("Docapp")
+    .collection("doctors")
+    .deleteOne({_id:new ObjectId(id)});
+    
+}

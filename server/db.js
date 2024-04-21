@@ -1,7 +1,7 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { MongoClient } from "mongodb";
-const Connecting=
-"mongodb+srv://meena:meena14@cluster0.ko6rp9j.mongodb.net/";
+const Connecting = process.env.MONGO_URL;
 const LocalConnecting="mongodb://127.0.0.1:27017/"
 
 async function dbConnect(){

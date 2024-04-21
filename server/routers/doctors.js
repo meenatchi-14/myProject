@@ -1,5 +1,5 @@
 import express from "express"
-import { addNewDoctor, editDoctor, getAllDoctors } from "../conrollers/doctors.js";
+import { addNewDoctor, deleteDoctor, editDoctor, getAllDoctors } from "../conrollers/doctors.js";
 
 const router=express.Router();
 router.post("/add",async(req,res)=>{
@@ -36,8 +36,8 @@ router.post("/add",async(req,res)=>{
         res.status(500).json({error:"internal server error"})
     }
     })
-
-    router.put("/edit/:id",async(req,res)=>{
+ //updating doctors
+     router.put("/edit/:id",async(req,res)=>{
  try {
      const {id}=req.params;
       //we need to handle error req.body
@@ -54,5 +54,19 @@ router.post("/add",async(req,res)=>{
     res.status(500).json({error:"internal server error"})
  }
     })
+    router.delete("/delete/:id",async(req,res)=>{
+        try {
+            //delete data
+            const {id}=req.params;
+                const deletedDoctor= await deleteDoctor(id)
+                if(!deletedDoctor.acknowledged){
+                   return res.status(400).json({error:"error is delete data"})
+               }
+               res.status(201).json({data:deletedDoctor});
+       
+        } catch (error) {
+           res.status(500).json({error:"internal server error"})
+        }
+           })
 
     export const doctorRouter=router;
