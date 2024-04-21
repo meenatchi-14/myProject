@@ -10,8 +10,11 @@ import{AppState} from "./context/AppContext"
 import { getAllDoctor } from "./helper/helper.js";
 import StatePage from "./pages/StatePage.jsx";
 import CallBackPage from "./pages/CallBackPage.jsx";
+<<<<<<< HEAD
 import Login from "./pages/Login.jsx";
 
+=======
+>>>>>>> 2f18706627a5ecf25f2a24838544c5440c22a10b
 
  
   function App() {
@@ -60,6 +63,7 @@ import Login from "./pages/Login.jsx";
         <CallBackPage />
         }
         />
+<<<<<<< HEAD
          <Route
          exact 
          path="/Login" 
@@ -68,6 +72,8 @@ import Login from "./pages/Login.jsx";
         }
         /> 
         
+=======
+>>>>>>> 2f18706627a5ecf25f2a24838544c5440c22a10b
       </Routes>
       
 
