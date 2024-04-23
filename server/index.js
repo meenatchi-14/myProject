@@ -4,7 +4,7 @@ import { doctorRouter } from './routers/doctors.js';
 import dotenv from "dotenv"
 
 //port
-const PORT=process.env.PORT
+const PORT= 9000 || process.env.PORT
 //initaling server
 const app = express();
 //middle ware
