@@ -1,8 +1,9 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-
-
+/* eslint-disable no-unused-vars */
 import { MongoClient } from "mongodb";
+import dotenv from "dotenv"
+
+dotenv.config()
 const Connecting = process.env.MONGO_URL;
 const LocalConnecting="mongodb://127.0.0.1:27017/"
 

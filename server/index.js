@@ -2,9 +2,10 @@
 import express from 'express';
 import { doctorRouter } from './routers/doctors.js';
 import dotenv from "dotenv"
+import { userRouter } from './routers/user.js';
 
 //port
-const PORT= 9000 || process.env.PORT
+const PORT= process.env.PORT
 //initaling server
 const app = express();
 //middle ware
@@ -13,6 +14,6 @@ app.use(express.json())
 dotenv.config()
 //applicational router
  app.use("/doctor",doctorRouter)
-
+ app.use("/user",userRouter)
 //listening a server
 app.listen(PORT,()=>{console.log("server listening")})
