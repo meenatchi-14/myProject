@@ -1,8 +1,9 @@
 import express from "express"
 import { addNewDoctor, deleteDoctor, editDoctor, getAllDoctors } from "../conrollers/doctors.js";
 
+
 const router=express.Router();
-router.post("/add",async(req,res)=>{
+router.post("/add", async(req,res)=>{
     //data
     try {
         //we need to handle error req.body
