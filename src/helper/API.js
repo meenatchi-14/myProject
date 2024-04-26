@@ -1,1 +1,2 @@
-export const API = "https://652ab6634791d884f1fd4339.mockapi.io/Doctor";
+export const API     = "https://docapp-zvwe.onrender.com/doctor";
+export const UserAPI = "https://docapp-zvwe.onrender.com/user";

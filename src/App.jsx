@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 //eslint-disable-next-line react/prop-types
-import {Route,Routes} from"react-router-dom";
+import {Route,Routes, useNavigate} from"react-router-dom";
  import DocDash from "./pages/DocDash";
  import DocAdd from "./pages/DocAdd";
  import DocEdit from "./pages/DocEdit";
@@ -10,19 +11,20 @@ import{AppState} from "./context/AppContext"
 import { getAllDoctor } from "./helper/helper.js";
 import StatePage from "./pages/StatePage.jsx";
 import CallBackPage from "./pages/CallBackPage.jsx";
-<<<<<<< HEAD
 import Login from "./pages/Login.jsx";
 
-=======
->>>>>>> 2f18706627a5ecf25f2a24838544c5440c22a10b
 
- 
   function App() {
+    const navigate=useNavigate();
     const [doctorData, setDoctorData] = useState();
     useEffect(() => {
+      if(!localStorage.getItem("token")){
+        navigate("/login",{replace:true})
+      }else{
       getAllDoctor().then((data) => {
-        setDoctorData(data);
+        setDoctorData(data.data);
       });
+    }
     }, []);
   const{theme}=AppState();
   return (
@@ -30,7 +32,7 @@ import Login from "./pages/Login.jsx";
       <Routes>
         
         <Route
-         exact 
+         
          path="/" 
         element={
         <DocDash doctorData={doctorData} setDoctorData={setDoctorData} />
@@ -50,20 +52,19 @@ import Login from "./pages/Login.jsx";
         />
         <Route path="*"element={<NoPage/>}/>
         <Route
-         exact 
+          
          path="/state" 
         element={
         <StatePage />
          }
          />
           <Route
-         exact 
+         
          path="/callback" 
         element={
         <CallBackPage />
         }
         />
-<<<<<<< HEAD
          <Route
          exact 
          path="/Login" 
@@ -71,9 +72,7 @@ import Login from "./pages/Login.jsx";
         <Login />
         }
         /> 
-        
-=======
->>>>>>> 2f18706627a5ecf25f2a24838544c5440c22a10b
+
       </Routes>
       
 

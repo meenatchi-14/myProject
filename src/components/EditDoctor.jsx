@@ -12,11 +12,11 @@ const[docStatus,setDocStatus]=useState("");
 const[index,setIndex]=useState("")
 const navigate=useNavigate();
 useEffect(()=>{
-    const selectedDoctor=doctorData.filter((doc)=>doc.id ==editId);
-    const selectedDocIndex=doctorData.findIndex((doc)=>doc.id ==editId);
+    const selectedDoctor=doctorData.filter((doc)=>doc._id ==editId);
+    const selectedDocIndex=doctorData.findIndex((doc)=>doc._id ==editId);
     console.log(selectedDocIndex);
     setIndex[selectedDocIndex]
-    setDocName(selectedDoctor[0].doc_name);
+    setDocName(selectedDoctor[0].doctor_name);
 setHospitalName(selectedDoctor[0].hospital_name);
 setSpecializtion(selectedDoctor[0].specialization);
 setDocStatus(selectedDoctor[0].status);
@@ -25,7 +25,7 @@ setDocStatus(selectedDoctor[0].status);
 //update
 const updateDoctorDetails=()=>{
     const editedDoctor={
-        doc_name:docName,
+        doctor_name:docName,
         hospital_name:hospitalName,
         specialization,
         status:docStatus,   
